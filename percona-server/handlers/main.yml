@@ -1,0 +1,16 @@
+---
+# handlers file for percona-server
+- name: reload mysql daemon
+  ansible.builtin.systemd:
+    name: mysql
+    state: restarted
+    daemon_reload: true
+  become: true
+
+- name: verify if jemalloc is already installed
+  ansible.builtin.find:
+    path: /usr/
+    file_type: file
+    pattern: 'libjemalloc*'
+    recurse: yes
+  register: already_installed

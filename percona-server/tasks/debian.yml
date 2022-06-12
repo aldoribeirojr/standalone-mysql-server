@@ -1,0 +1,19 @@
+---
+- name: Install Percona release repository.
+  ansible.builtin.apt:
+    deb: "https://repo.percona.com/apt/percona-release_latest.{{ ansible_distribution_release | lower }}_all.deb"
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+  register: percona_repository_installed
+
+- name: Set the Percona repository version.
+  ansible.builtin.command: "percona-release setup {{ percona_server_version }}"
+  register: percona_repository_version
+  when: percona_repository_installed is changed
+
+- name: Install Percona Server.
+  ansible.builtin.apt:
+    name: "{{ 'percona-server-server-5.7' if percona_server_version == 'ps-57' else 'percona-server-server' }}"
+    state: present
+  become: true

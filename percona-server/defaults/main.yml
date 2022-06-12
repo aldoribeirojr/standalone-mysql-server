@@ -1,0 +1,4 @@
+---
+# defaults file for percona-server
+percona_server_version: 'ps-57' # or ps-80
+jemalloc_ld_preload: ''

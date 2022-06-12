@@ -1,0 +1,24 @@
+---
+- name: Update all packages and their dependencies.
+  ansible.builtin.apt:
+    name: '*'
+    state: latest
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: Prerequirements for Debian based operating system.
+  ansible.builtin.package:
+    name:
+      - gnupg2
+      - curl
+    state: present
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Update all packages and their dependencies.
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+    update_cache: true
+  when: ansible_os_family == 'RedHat'

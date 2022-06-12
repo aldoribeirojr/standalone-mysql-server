@@ -1,0 +1,31 @@
+#
+# This repo is managed by Ansible, do not edit!
+#
+
+[{{ percona_server_version }}-release-x86_64]
+name = Percona Server latest release/x86_64 YUM repository
+baseurl = http://repo.percona.com/{{ percona_server_version }}/yum/release/$releasever/RPMS/x86_64
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/PERCONA-PACKAGING-KEY
+
+[{{ percona_server_version }}-release-sources]
+name = Percona Server latest release/sources YUM repository
+baseurl = http://repo.percona.com/{{ percona_server_version }}/yum/release/$releasever/SRPMS
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/PERCONA-PACKAGING-KEY
+
+{# [{{ percona_server_version }}-release-x86_64]
+name = Percona Server latest release/x86_64 YUM repository
+baseurl = http://repo.percona.com/{{ percona_server_version }}/yum/release/latest/RPMS/x86_64
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/PERCONA-PACKAGING-KEY #}
+
+{# [{{ percona_server_version }}-release-sources]
+name = Percona Server latest release/sources YUM repository
+baseurl = http://repo.percona.com/{{ percona_server_version }}/yum/release/latest/SRPMS
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/PERCONA-PACKAGING-KEY #}

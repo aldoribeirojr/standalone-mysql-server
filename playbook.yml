@@ -1,0 +1,6 @@
+---
+- name: Jemalloc for MySQL/MariaDB.
+  hosts: all
+  become: true
+  roles:
+    - percona-server

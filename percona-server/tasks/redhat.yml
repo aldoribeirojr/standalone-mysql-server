@@ -1,0 +1,25 @@
+---
+- name: Install Percona release repository.
+  ansible.builtin.yum:
+    name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+    state: present
+  become: true
+  register: percona_repository_installed
+
+- name: Set Percona Server version.
+  ansible.builtin.command: "percona-release setup {{ percona_server_version }}"
+  become: true
+  when: percona_repository_installed is changed
+
+- name: Install Percona Server.
+  ansible.builtin.yum:
+    name: "{{ 'Percona-Server-server-57.x86_64' if percona_server_version == 'ps-57' else 'percona-server-server.x86_64' }}"
+    state: present
+    update_cache: true
+  become: true
+
+- name: Start Percona Server.
+  ansible.builtin.service:
+    name: mysql
+    state: started
+  become: true
